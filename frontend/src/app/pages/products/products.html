@@ -1,0 +1,73 @@
+<main class="products-page">
+	<header class="site-header">
+		<a class="brand" routerLink="/products">PARFUME</a>
+		<nav aria-label="Account navigation">
+			<a class="logout-button" routerLink="/scent-finder">Scent Finder</a>
+			<button type="button" class="favorites-link" [class.active]="showFavoritesOnly" (click)="showFavoritesOnly = !showFavoritesOnly">
+				Saved <b>{{ favoritesCount }}</b>
+			</button>
+			<a class="cart" routerLink="/cart">Bag <b>{{ cartCount }}</b></a>
+			<a class="logout-button" routerLink="/admin">Admin</a>
+		</nav>
+	</header>
+
+	<section class="catalog-intro">
+		<div>
+			<p class="eyebrow">THE COLLECTION</p>
+			<h1>Find the scent<br /><em>that feels like you.</em></h1>
+		</div>
+		<p class="intro-copy">Small-batch fragrances made for everyday rituals, quiet confidence and memorable entrances.</p>
+	</section>
+
+	<section class="catalog-tools" aria-label="Catalog filters">
+		<label class="search-box">
+			<span>Search</span>
+			<input [(ngModel)]="searchTerm" type="search" placeholder="Name, note or mood" />
+		</label>
+		<label class="sort-box">
+			<span>Sort by</span>
+			<select [(ngModel)]="sortBy" aria-label="Sort fragrances">
+				<option value="featured">Featured</option>
+				<option value="price-low">Price: low to high</option>
+				<option value="price-high">Price: high to low</option>
+				<option value="name">Name: A to Z</option>
+			</select>
+		</label>
+		<div class="category-list">
+			<button
+				*ngFor="let category of categories"
+				type="button"
+				[class.active]="selectedCategory === category"
+				(click)="selectedCategory = category"
+			>
+				{{ category }}
+			</button>
+		</div>
+	</section>
+
+	<p class="result-count">{{ filteredProducts.length }} fragrances</p>
+
+	<section class="product-grid" aria-label="Perfume collection">
+		<article class="product-card" *ngFor="let product of filteredProducts">
+			<div class="product-image" [class]="product.color">
+				<img [src]="product.image" [alt]="product.name" />
+				<small *ngIf="product.badge">{{ product.badge }}</small>
+				<button type="button" class="favorite-button" [class.is-favorite]="isFavorite(product)" [attr.aria-label]="isFavorite(product) ? 'Remove from saved fragrances' : 'Save fragrance'" (click)="toggleFavorite(product)">
+					{{ isFavorite(product) ? '♥' : '♡' }}
+				</button>
+			</div>
+			<div class="product-info">
+				<p class="product-category">{{ product.category }} · {{ product.size }}</p>
+				<h2>{{ product.name }}</h2>
+				<p class="product-notes">{{ product.notes }}</p>
+				<div class="product-footer">
+					<strong>${{ product.price }}</strong>
+					<button type="button" (click)="addToCart(product)">Add to bag</button>
+				</div>
+			</div>
+		</article>
+	</section>
+
+	<p class="empty-state" *ngIf="filteredProducts.length === 0">No fragrances match that search.</p>
+	<p class="toast" *ngIf="addedProduct">{{ addedProduct }} added to your bag</p>
+</main>

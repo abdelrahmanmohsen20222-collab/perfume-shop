@@ -1,0 +1,59 @@
+<main class="register-page">
+  <section class="register-card">
+    <a class="back-link" routerLink="/login">Back to sign in</a>
+
+    <p class="eyebrow">PARFUME</p>
+    <h1>Create your account</h1>
+    <p class="subtitle">Join us and find your signature scent.</p>
+
+    <form (ngSubmit)="register()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          [(ngModel)]="username"
+          placeholder="Choose a username"
+          autocomplete="username"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Choose a password"
+          autocomplete="new-password"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm password</label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          [(ngModel)]="confirmPassword"
+          placeholder="Repeat your password"
+          autocomplete="new-password"
+        />
+      </div>
+
+      @if (errorMessage) {
+        <p class="message error-message">{{ errorMessage }}</p>
+      }
+
+      @if (successMessage) {
+        <p class="message success-message">{{ successMessage }}</p>
+      }
+
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Creating account...' : 'Create account' }}
+      </button>
+    </form>
+  </section>
+</main>

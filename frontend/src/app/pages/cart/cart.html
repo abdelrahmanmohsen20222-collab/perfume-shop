@@ -1,0 +1,53 @@
+<main class="cart-page">
+  <header class="cart-header">
+    <a routerLink="/products" class="brand">PARFUME</a>
+    <a routerLink="/products" class="continue-link">Continue shopping</a>
+  </header>
+
+  <section class="cart-intro">
+    <p class="eyebrow">YOUR SELECTION</p>
+    <h1>Your fragrance bag</h1>
+    <p>{{ cartService.totalQuantity }} item{{ cartService.totalQuantity === 1 ? '' : 's' }}</p>
+  </section>
+
+  <section class="cart-layout" *ngIf="items.length; else emptyCart">
+    <div class="cart-items">
+      <article class="cart-item" *ngFor="let item of items">
+        <img [src]="item.product.image" [alt]="item.product.name" />
+        <div class="item-info">
+          <p class="category">{{ item.product.category }} · {{ item.product.size }}</p>
+          <h2>{{ item.product.name }}</h2>
+          <p>{{ item.product.notes }}</p>
+          <button type="button" class="remove-button" (click)="remove(item.product.id)">Remove</button>
+        </div>
+        <div class="item-controls">
+          <label>
+            <span>Quantity</span>
+            <select [value]="item.quantity" (change)="updateQuantity(item, +$any($event.target).value)">
+              <option *ngFor="let quantity of [1, 2, 3, 4, 5]" [value]="quantity">{{ quantity }}</option>
+            </select>
+          </label>
+          <strong>${{ item.product.price * item.quantity }}</strong>
+        </div>
+      </article>
+    </div>
+
+    <aside class="summary">
+      <p class="eyebrow">ORDER SUMMARY</p>
+      <div><span>Subtotal</span><strong>${{ cartService.subtotal }}</strong></div>
+      <div><span>Shipping</span><span class="free">Free</span></div>
+      <div class="total"><span>Total</span><strong>${{ cartService.subtotal }}</strong></div>
+      <button type="button" class="checkout-button" (click)="checkout()">Proceed to checkout</button>
+      <small>Secure checkout · Free shipping</small>
+    </aside>
+  </section>
+
+  <ng-template #emptyCart>
+    <section class="empty-cart">
+      <div class="empty-mark">P</div>
+      <h2>Your bag is waiting</h2>
+      <p>Explore the collection and choose a scent that feels like you.</p>
+      <a routerLink="/products">Explore fragrances</a>
+    </section>
+  </ng-template>
+</main>

@@ -1,0 +1,53 @@
+<main class="scent-finder-page">
+  <header class="finder-header">
+    <a class="brand" routerLink="/products">PARFUME</a>
+    <a routerLink="/products">Shop fragrances</a>
+  </header>
+
+  <section class="finder-intro">
+    <p class="eyebrow">AI SCENT FINDER</p>
+    <h1>Find the fragrance<br /><em>that fits your moment.</em></h1>
+    <p>Share a few preferences and our scent concierge will match you with fragrances from our collection.</p>
+  </section>
+
+  <section class="finder-card">
+    <form (ngSubmit)="findMyScent()">
+      <label>How do you want to feel?
+        <select name="mood" [(ngModel)]="mood">
+          <option>Warm and comforting</option>
+          <option>Fresh and energized</option>
+          <option>Elegant and confident</option>
+          <option>Romantic and soft</option>
+          <option>Bold and mysterious</option>
+        </select>
+      </label>
+      <label>Notes you love
+        <input name="notes" [(ngModel)]="notes" placeholder="e.g. rose, citrus, vanilla or woody scents" maxlength="160" />
+      </label>
+      <label>Where will you wear it?
+        <select name="occasion" [(ngModel)]="occasion">
+          <option>Everyday</option>
+          <option>Work or meetings</option>
+          <option>Date night</option>
+          <option>Evening out</option>
+          <option>A special gift</option>
+        </select>
+      </label>
+      <label>Preferred presence
+        <select name="strength" [(ngModel)]="strength">
+          <option>Soft and close to the skin</option>
+          <option>Noticeable but balanced</option>
+          <option>Rich and long-lasting</option>
+        </select>
+      </label>
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <button type="submit" [disabled]="isLoading">{{ isLoading ? 'Finding your scent...' : 'Find my scent' }}</button>
+    </form>
+
+    <article class="recommendation" *ngIf="recommendation">
+      <p class="eyebrow">YOUR MATCH</p>
+      <p>{{ recommendation }}</p>
+      <a routerLink="/products">Explore the collection</a>
+    </article>
+  </section>
+</main>

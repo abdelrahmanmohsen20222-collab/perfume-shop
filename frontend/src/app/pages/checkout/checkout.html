@@ -1,0 +1,53 @@
+<main class="checkout-page">
+  <header class="checkout-header">
+    <a routerLink="/products" class="brand">PARFUME</a>
+    <a routerLink="/cart" class="back-link">Back to bag</a>
+  </header>
+
+  <section class="checkout-title">
+    <p class="eyebrow">CHECKOUT</p>
+    <h1>Complete your order</h1>
+    <p>Tell us where to deliver your fragrance.</p>
+  </section>
+
+  <section class="checkout-layout" *ngIf="!isSubmitted; else orderComplete">
+    <form class="checkout-form" (ngSubmit)="placeOrder()">
+      <h2>Delivery information</h2>
+      <label>Full name <input name="fullName" [(ngModel)]="fullName" autocomplete="name" /></label>
+      <label>Phone number <input name="phone" type="tel" [(ngModel)]="phone" autocomplete="tel" /></label>
+      <label>Address <input name="address" [(ngModel)]="address" autocomplete="street-address" /></label>
+      <div class="form-row">
+        <label>City <input name="city" [(ngModel)]="city" autocomplete="address-level2" /></label>
+        <label>Postal code <input name="postalCode" [(ngModel)]="postalCode" autocomplete="postal-code" /></label>
+      </div>
+
+      <h2>Payment</h2>
+      <label>Payment method
+        <select name="paymentMethod" [(ngModel)]="paymentMethod">
+          <option value="card">Card on delivery</option>
+          <option value="cash">Cash on delivery</option>
+        </select>
+      </label>
+
+      <p class="note">No card number or account password is stored by this frontend.</p>
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <button type="submit">Place order</button>
+    </form>
+
+    <aside class="order-summary">
+      <p class="eyebrow">ORDER SUMMARY</p>
+      <div><span>{{ cartService.totalQuantity }} items</span><strong>${{ cartService.subtotal }}</strong></div>
+      <div><span>Shipping</span><strong class="free">Free</strong></div>
+      <div class="total"><span>Total</span><strong>${{ cartService.subtotal }}</strong></div>
+    </aside>
+  </section>
+
+  <ng-template #orderComplete>
+    <section class="order-complete">
+      <div class="complete-mark">✓</div>
+      <h2>{{ orderMessage }}</h2>
+      <p>We will contact you before delivery.</p>
+      <a routerLink="/products">Continue shopping</a>
+    </section>
+  </ng-template>
+</main>

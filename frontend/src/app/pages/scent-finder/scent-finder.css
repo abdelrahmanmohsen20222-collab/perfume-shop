@@ -1,0 +1,21 @@
+.scent-finder-page { min-height: 100vh; padding: 1.5rem clamp(1.25rem, 5vw, 5rem) 4rem; background: #f6f1eb; color: #201915; }
+.finder-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 3rem; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+.finder-header a { color: inherit; text-decoration: none; }
+.brand { font-size: 1.1rem; font-weight: 700; letter-spacing: .18em; }
+.finder-intro { max-width: 720px; margin: 0 auto 2rem; text-align: center; }
+.eyebrow { margin: 0 0 .8rem; color: #8a5d49; font-size: .72rem; font-weight: 700; letter-spacing: .16em; }
+h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; line-height: 1.02; }
+h1 em { color: #8a5d49; }
+.finder-intro > p:last-child { max-width: 520px; margin: 1.3rem auto 0; line-height: 1.6; color: #665a52; }
+.finder-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; max-width: 650px; margin: 0 auto; }
+form, .recommendation { padding: clamp(1.25rem, 4vw, 2.25rem); background: #fffdf9; border: 1px solid #e3d9d0; }
+form { display: grid; gap: 1.1rem; }
+label { display: grid; gap: .45rem; font-size: .9rem; font-weight: 600; }
+input, select { width: 100%; box-sizing: border-box; padding: .8rem; border: 1px solid #d8c9bc; border-radius: 0; background: #fff; color: #201915; font: inherit; }
+button { border: 0; padding: .95rem 1.2rem; background: #201915; color: #fff; cursor: pointer; font: inherit; }
+button:disabled { cursor: wait; opacity: .65; }
+.error-message { margin: 0; color: #b22929; font-size: .88rem; }
+.recommendation { background: #34251f; color: #fffaf5; }
+.recommendation .eyebrow { color: #dfb99f; }
+.recommendation > p:last-of-type { margin: 0; white-space: pre-line; line-height: 1.65; }
+.recommendation a { display: inline-block; margin-top: 1.25rem; color: #fffaf5; }

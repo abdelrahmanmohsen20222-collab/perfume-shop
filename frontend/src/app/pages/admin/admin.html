@@ -1,0 +1,45 @@
+<main class="admin-page">
+  <header class="admin-header">
+    <a routerLink="/products" class="brand">PARFUME</a>
+    <span>Admin workspace</span>
+  </header>
+
+  <section class="admin-card" *ngIf="!isAuthorized; else adminPanel">
+    <p class="eyebrow">PRIVATE AREA</p>
+    <h1>Admin access</h1>
+    <p>Sign in with your admin email and password to manage the fragrance catalog.</p>
+    <form (ngSubmit)="unlock()">
+      <label>Email <input name="email" type="email" [(ngModel)]="email" autocomplete="username" /></label>
+      <label>Password <input name="password" type="password" [(ngModel)]="password" autocomplete="current-password" /></label>
+      <p class="error-message" *ngIf="message">{{ message }}</p>
+      <button type="submit" [disabled]="isLoading">{{ isLoading ? 'Signing in...' : 'Enter workspace' }}</button>
+    </form>
+  </section>
+
+  <ng-template #adminPanel>
+    <section class="admin-card">
+      <p class="eyebrow">CATALOG MANAGEMENT</p>
+      <h1>Add a product</h1>
+      <p>Only authenticated administrators can access this workspace.</p>
+      <form (ngSubmit)="addProduct()">
+        <label>Product name <input name="name" [(ngModel)]="name" /></label>
+        <label>Category
+          <select name="category" [(ngModel)]="category">
+            <option value="Floral">Floral</option>
+            <option value="Woody">Woody</option>
+            <option value="Amber">Amber</option>
+            <option value="Fresh">Fresh</option>
+          </select>
+        </label>
+        <label>Notes <input name="notes" [(ngModel)]="notes" placeholder="Rose, iris and musk" /></label>
+        <div class="form-row">
+          <label>Price <input name="price" type="number" min="1" [(ngModel)]="price" /></label>
+          <label>Size <input name="size" [(ngModel)]="size" /></label>
+        </div>
+        <label>Product image URL <input name="image" type="url" [(ngModel)]="image" /></label>
+        <p class="message" [class.error-message]="message && !message.includes('added')" [class.success-message]="message.includes('added')" *ngIf="message">{{ message }}</p>
+        <button type="submit">Add product</button>
+      </form>
+    </section>
+  </ng-template>
+</main>
