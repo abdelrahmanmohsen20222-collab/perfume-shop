@@ -35,6 +35,19 @@ npm start
 
 Open `http://localhost:4200`.
 
+## Run with Docker
+
+Install Docker Desktop, copy the environment template, and set strong local secrets:
+
+```powershell
+Copy-Item .env.example .env
+docker compose up --build
+```
+
+Open `http://localhost:8080`. The frontend container serves the Angular app and proxies `/api` to the backend container. SQL Server data is stored in the `sqlserver-data` Docker volume.
+
+The database schema and seed data are not included in the repository yet. Import the `PerfumeShope` database/schema into the SQL Server container before using registration, login, catalog, or orders.
+
 The frontend expects the API at `https://localhost:7096/api`. Trust the local ASP.NET HTTPS development certificate if the browser displays a certificate warning:
 
 ```powershell

@@ -12,7 +12,7 @@ interface AuthResponse {
 })
 export class AuthService {
 
-  private apiUrl = 'https://localhost:7096/api/Auth';
+  private apiUrl = '/api/Auth';
   private readonly requestTimeoutMs = 3000;
 
   constructor(private http: HttpClient) {}

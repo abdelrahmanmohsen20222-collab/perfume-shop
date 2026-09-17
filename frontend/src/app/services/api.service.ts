@@ -7,7 +7,7 @@ import { catchError, throwError, timeout } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'https://localhost:7096/api';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
